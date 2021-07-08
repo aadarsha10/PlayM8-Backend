@@ -1,14 +1,17 @@
-const http = require('http');
+const express = require('express');
 
-const hostname = '127.0.0.1';
-const port = 3000;
+const cors = require('cors')
+const route_organizer_details = require('./route/organizer_details_route')
+const db = require('./database/db');
+const bodyParser = require('body-parser');
+const playerSignup_route = require('./Routes/playerSignip_route')
 
-const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello World');
-});
+const app = express();
+app.use(cors());
+app.use(express.json());
 
-server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
-});
+
+app.use(route_organizer_details)
+app.use(playerSignup_route)
+
+app.listen(80);
