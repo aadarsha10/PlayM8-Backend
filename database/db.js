@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-// var uri = "mongodb://localhost:27017/projects"
+var uri = "mongodb://127.0.0.1:27017/PlayM8"
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
 
 const connection = mongoose.connection;

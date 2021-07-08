@@ -1,7 +1,7 @@
 const express = require('express');
 
 const cors = require('cors')
-const route_organizer_details = require('./route/organizer_details_route')
+const route_organizer_details = require('./route/organizer_route')
 const db = require('./database/db');
 const bodyParser = require('body-parser');
 const playerSignup_route = require('./Routes/playerSignip_route')
