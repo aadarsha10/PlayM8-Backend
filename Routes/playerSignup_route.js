@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const Player = require('..Model/playerSignup_model')
+const playerSignup_model = require('../Model/playerSignup_model')
+const jwt = require('jsonwebtoken')
+const bcryptjs = require('bcryptjs')
+
 
 
 router.post('/register', function(req, res){
@@ -11,9 +14,9 @@ router.post('/register', function(req, res){
     const email = req.body.email
     const contact = req.body.contact
 
-    console.log(Player)
+    console.log(playerSignup_model)
 
-    const me = new Player({
+    const me = new playerSignup_model({
         firstName : firstName,
         lastName  : lastName,
         userName  : userName,
@@ -34,7 +37,7 @@ router.post('/login', function(req, res){
 
     console.log("username", password)
 
-    Player.findOne({userName: userName})
+    playerSignup_model.findOne({userName: userName})
     .then(function(playerData){
         if(playerData === null){
             return res.status(400).json({
@@ -62,3 +65,5 @@ router.post('/login', function(req, res){
         res.status(500).json({message : err});
 })
 })
+
+module.exports = router

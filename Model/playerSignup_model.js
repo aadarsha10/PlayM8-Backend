@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const Player = mongoose.model('player',{
+const players = mongoose.model('players',{
     firstName:{
         type:String,
          required : true
@@ -30,4 +30,4 @@ const Player = mongoose.model('player',{
     },
 })
 
-module.exports = Player;
+module.exports = players;
