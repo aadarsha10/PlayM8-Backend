@@ -1,12 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const organizer = require('../models/organizer_detail_model')
+const admin = require('../models/admin_details_model')
 const { check, validationResult } = require('express-validator')
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
-
-router.post('/createOrganizer', [
+router.post('/createAdmin', [
 
 
     check('Fullname', 'Firstname is required').not().isEmpty(),
@@ -36,25 +35,29 @@ router.post('/createOrganizer', [
         const Email = req.body.Email
         const Password = req.body.Password
 
-        const org_details = new organizer({
-            Fullname: Fullname,
-            Address: Address,
-            Contact: Contact,
-            Username: Username,
-            Email: Email,
-            Password: Password
-        })
+        bcryptjs.hash(Password, 10, function (err, hash) {
 
-        console.log("details:", org_details)
+            const admin_details = new admin({
+                Fullname: Fullname,
+                Address: Address,
+                Contact: Contact,
+                Username: Username,
+                Email: Email,
+                Password: hash
+            });
 
-        org_details.save().then(function (result) {
+            console.log("details:", admin_details)
+
+        admin_details.save().then(function (result) {
             res.json({
-                message: "Registered Succesfully!"
-            })
-
-        }).catch(function (err) {
-            res.status(500).json(err)
+                message: " Admin Registered Succesfully!"
+            
+        
         })
+    }).catch(function (err) {
+            res.status(500).json(err)
+        });
+    });
     }
     else {
         const error = validationError.errors[0].msg
@@ -63,42 +66,38 @@ router.post('/createOrganizer', [
     }
 })
 
-router.post('/login', function(req,res){
+
+router.post('/login/admin', function(req,res){
     const userName=req.body.userName
     const password=req.body.password   //user provided password
     //we need to find if user exists
 
     console.log("userName", userName)
     console.log("password", password)
-    organizer.findOne({Username:userName})    //first ko userName user_model bata aako sec ko variable
-    .then(function(organizerData){
-        if(organizerData===null){
+    admin.findOne({Username:userName})    //first ko userName user_model bata aako sec ko variable
+    .then(function(adminData){
+        if(adminData===null){
             return res.status(403).json({message : "Invalid username or password!"})
         }
 
-        console.log("organizerData", organizerData)
+        console.log("adminData", adminData)
         //username is correct
-        bcryptjs.compare(password, organizerData.Password, function(err, result)
+        bcryptjs.compare(password, adminData.Password, function(err, result)
        { 
             console.log("result", result)//first password is variable and another is db password
             if(result===false){
                 return res.status(403).json({message : "Invalid Username or Passworddddd"})
             }
-            else {
-                res.status(200).json({
-                    message: "logged in Succesfully!"
-                })
-            }
-            res.send("Correct")
-            const token=jwt.sign({customerId:customerData._id},'secretkey')  //providing token
+           
+            const token=jwt.sign({adminId:adminData._id},'secretkey')  //providing token
             res.status(200).json({
                 message:"Authorization success",
                 token:token,
-                customerID : customerData._id,
-                username : customerData.userName,
-                customerName : customerData.fullName,
-                customerEmail : customerData.email,
-                customerPhone : customerData.phoneNumber
+                adminID : adminData._id,
+                username : adminData.Username,
+                fullname : adminData.Fullname,
+                Email : adminData.Email,
+                Contact : adminData.Contact
             })
         
             
