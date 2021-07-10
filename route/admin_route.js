@@ -74,13 +74,13 @@ router.post('/login/admin', function(req,res){
 
     console.log("userName", userName)
     console.log("password", password)
-    organizer.findOne({Username:userName})    //first ko userName user_model bata aako sec ko variable
+    admin.findOne({Username:userName})    //first ko userName user_model bata aako sec ko variable
     .then(function(adminData){
         if(adminData===null){
             return res.status(403).json({message : "Invalid username or password!"})
         }
 
-        console.log("organizerData", adminData)
+        console.log("adminData", adminData)
         //username is correct
         bcryptjs.compare(password, adminData.Password, function(err, result)
        { 
@@ -88,21 +88,16 @@ router.post('/login/admin', function(req,res){
             if(result===false){
                 return res.status(403).json({message : "Invalid Username or Passworddddd"})
             }
-            else {
-                res.status(200).json({
-                    message: "logged in Succesfully!"
-                })
-            }
-            res.send("Correct")
+           
             const token=jwt.sign({adminId:adminData._id},'secretkey')  //providing token
             res.status(200).json({
                 message:"Authorization success",
                 token:token,
                 adminID : adminData._id,
-                username : adminData.userName,
-                customerName : adminData.fullName,
-                customerEmail : adminData.email,
-                customerPhone : adminData.phoneNumber
+                username : adminData.Username,
+                fullname : adminData.Fullname,
+                Email : adminData.Email,
+                Contact : adminData.Contact
             })
         
             
