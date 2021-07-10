@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const organizer = mongoose.model('Organizer', {
+const admin = mongoose.model('Admin', {
 
     Fullname: {
         type: String,
@@ -34,4 +34,4 @@ const organizer = mongoose.model('Organizer', {
     }
 })
 
-module.exports = organizer
+module.exports = admin
