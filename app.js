@@ -15,6 +15,7 @@ app.use(express.json());
 
 app.use(route_organizer_details)
 app.use(route_admin)
+app.use(playerSignup_route)
 
 
-app.listen(80);
+app.listen(90);
