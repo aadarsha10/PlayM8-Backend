@@ -5,7 +5,7 @@ const route_organizer_details = require('./route/organizer_route')
 const route_admin = require('./route/admin_route')
 const db = require('./database/db');
 const bodyParser = require('body-parser');
-const playerSignup_route = require('./Routes/playerSignip_route')
+const playerSignup_route = require('./route/playerSignip_route')
 
 
 const app = express();
