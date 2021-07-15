@@ -5,7 +5,7 @@ const route_organizer_details = require('./route/organizer_route')
 const route_admin = require('./route/admin_route')
 const db = require('./database/db');
 const bodyParser = require('body-parser');
-const playerSignup_route = require('./route/playerSignip_route')
+const playerSignup_route = require('./route/playerSignup_route')
 
 
 const app = express();
@@ -19,4 +19,4 @@ app.use(playerSignup_route)
 
 
 // app.listen(90);
-app.listen(process.env.PORT || 5000)
+app.listen(process.env.PORT || 90)

@@ -100,8 +100,6 @@ router.post('/login/admin', function(req,res){
                 Contact : adminData.Contact
             })
         
-            
- 
         })
     })
     .catch(function(err){
