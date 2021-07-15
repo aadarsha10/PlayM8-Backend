@@ -33,9 +33,10 @@ router.post('/register', function(req, res){
 
 router.post('/login', function(req, res){
     const userName = req.body.userName
-    const password = req.body.password
+    const passWord = req.body.password
 
-    console.log("username", password)
+    console.log("username",userName)
+    console.log("password",passWord)
 
     playerSignup_model.findOne({userName: userName})
     .then(function(playerData){
@@ -44,26 +45,29 @@ router.post('/login', function(req, res){
                 message : "Invalid Password!!!"
             })
         }
-        console.log("PlayerData", playerData.password)
+        console.log("PlayerData", playerData, playerData.password)
         
-        bcryptjs.compare(password, playerData.password, function(err, result){
-            if(result === false){
-                return res.status(400).json({message : "Invalid username or password"})
-            }
-
-            const token = jwt.sign({player_id : playerData._id}, 'secretkey')
-            res.status(200).json({
-                message : "Authorization Success",
-                token : token,
-                firstName : playerData.firstName,
-                email : playerData.email,
-                contact : playerData.contact,
-                userName : playerData.userName,
+            bcryptjs.compare(passWord, playerData.password, function(err,result){ //first password is variable and another is db password
+                if(result===false){
+                    return res.status(403).json({success:false, message : "Invalid username or password!"})
+                }
+                // res.send("Correct")
+                const token=jwt.sign({userId:playerData._id},'secretkey')  //providing token
+                res.status(200).json({
+                    //success:true,
+                    message : "Authorization Success",
+                    token:token,
+                    firstName : playerData.firstName,
+                    email : playerData.email,
+                    contact : playerData.contact,
+                    userName : playerData.userName
+                })
+            
             })
         })
-    }).catch(function(err){
-        res.status(500).json({message : err});
-})
+        .catch(function(err){
+        res.status(500).json({message : err});  
+    })
 })
 
 module.exports = router
