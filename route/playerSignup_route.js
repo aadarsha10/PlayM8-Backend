@@ -3,7 +3,8 @@ const router = express.Router()
 const player = require('../models/user_model')
 const { check, validationResult } = require('express-validator') //for validation npm i express-validator --save
 const bcryptjs = require('bcryptjs')   //for encryption, done after validation
-const jwt = require('jsonwebtoken')   //for token npm i jsonwebtoken --save
+const jwt = require('jsonwebtoken')
+const player = require('../models/playerSignup_model')   //for token npm i jsonwebtoken --save
 
 router.post('/register/player', function (req, res) {
     const errors = validationResult(req)
@@ -18,10 +19,10 @@ router.post('/register/player', function (req, res) {
 
 
         bcryptjs.hash(password, 10, function (err, hash) {   //hash varifies that a file/data hasnot altered.
-            const player = new player({ firstName: firstName, lastName: lastName, userName: userName, email: email, password: hash }) //first ko userName vnya database ko second ko chei mathi variable
-            console.log(player)
+            const players = new player({ firstName: firstName, lastName: lastName, userName: userName, email: email, password: hash }) //first ko userName vnya database ko second ko chei mathi variable
+            console.log(players)
 
-            player.save()
+            players.save()
                 .then(function () {
                     res.status(201).json({ success: true, message: "Registered!" })    //showing message in postman/client
                 })

@@ -37,7 +37,7 @@ router.post('/organizer/register', [
             console.log("details:", org_details)
             org_details.save().then(function (result) {
                 res.json({
-                    message: "Registered Succesfully!"
+                    message: "Registered"
                 })
             }).catch(function (err) {
                 res.status(500).json(err)
@@ -46,7 +46,8 @@ router.post('/organizer/register', [
     }
     else {
         const error = validationError.errors[0].msg
-        res.send({ error: error })
+        console.log("error", error)
+        res.json({message : error })
     }
 })
 
