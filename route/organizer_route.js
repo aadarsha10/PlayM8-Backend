@@ -48,6 +48,7 @@ router.post('/organizer/register', [
         const error = validationError.errors[0].msg
         console.log("error", error)
         res.json({message : error })
+        
     }
 })
 
