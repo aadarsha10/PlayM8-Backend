@@ -19,16 +19,21 @@ app.use(route_organizer_details)
 app.use(route_admin)
 app.use(route_player)
 
-// const users = require('/api/users');
-// app.use('/api/users', users);
-//********************** */
 // // -----
 app.use(express.static(path.join(__dirname, '../build')))
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../build'))
 })
 // -----
-const port = process.env.PORT || 90;
-app.listen(port, () => {
+// const port = process.env.PORT || 90;
+// app.listen(port, () => {
+//     console.log(`Server started on port ${port}`);
+// });
+
+let port = process.env.PORT;
+if (port == null || port == "") {
+    port = 5000;
+}
+app.listen(port,()=>{
     console.log(`Server started on port ${port}`);
 });
