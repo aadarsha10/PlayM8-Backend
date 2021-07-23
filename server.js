@@ -1,16 +1,34 @@
-const http = require('http');
+const express = require('express');
+const cors = require('cors');
+const path = require('path')
+const app = express();
+const route_organizer_details = require('./route/organizer_route')
+const route_admin = require('./route/admin_route');
+const route_player = require('./route/playerSignup_route');
+require('./database/db');
 
-const hostname = '127.0.0.1';
-const port = process.env.PORT;
-console.log(`Your port is ${port}`);
+// -----
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cors());
 
-const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello World');
+
+// -----
+// API******************//
+app.use(route_organizer_details)
+app.use(route_admin)
+app.use(route_player)
+
+// const users = require('/api/users');
+// app.use('/api/users', users);
+//********************** */
+// // -----
+app.use(express.static(path.join(__dirname, '../build')))
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../build'))
+})
+// -----
+const port = process.env.PORT || 90;
+app.listen(port, () => {
+    console.log(`Server started on port ${port}`);
 });
-
-server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
-});
-
