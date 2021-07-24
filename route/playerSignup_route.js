@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-
 const { check, validationResult } = require('express-validator') //for validation npm i express-validator --save
 const bcryptjs = require('bcryptjs')   //for encryption, done after validation
 const jwt = require('jsonwebtoken')
