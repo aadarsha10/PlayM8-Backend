@@ -71,4 +71,18 @@ router.get("/getRequest", function (req, res) {
     });
 });
 
+//Read 
+router.post('/getRequest/:username', function (req, res) {
+  const uname = req.params.username;
+  var approval_data = admin_request.find({ Username: uname })
+  .then(function (data) {
+    res.status(200).json({ message: "data fetched", approval_data: data })
+  })
+    .catch(function (e) {
+      res.status(500).json({ message: e })
+    });
+  console.log(uname)
+  
+});
+
 module.exports = router;
