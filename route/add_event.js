@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const events = require('../models/add_event_model')
 
 
 
@@ -17,6 +18,8 @@ router.post('/organizer/addEvent', function (req, res) {
         Image: Image,
         Description: Description
     })
+
+    console.log("event", eventDetail)
 
     eventDetail.save().then(function () {
         res.status(201).json({
