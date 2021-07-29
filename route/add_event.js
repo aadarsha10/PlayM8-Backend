@@ -30,4 +30,6 @@ router.post('/organizer/addEvent', function (req, res) {
 
 })
 
+
+
 module.exports = router

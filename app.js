@@ -6,6 +6,7 @@ const route_organizer_details = require('./route/organizer_route')
 const route_admin = require('./route/admin_route');
 const route_player = require('./route/playerSignup_route');
 const request_route = require("./route/admin_request_route");
+const image = require("./route/image_upload_route");
 require('./database/db');
 
 // -----
@@ -20,6 +21,8 @@ app.use(route_organizer_details)
 app.use(route_admin)
 app.use(route_player)
 app.use(request_route);
+app.use(image);
+
 
 // // -----
 app.use(express.static(path.join(__dirname, '../build')))
