@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
-
+const eventDetails = require("../models/add_event_model");
+const { check, validationResult } = require("express-validator");
 
 
 router.post('/organizer/addEvent', function (req, res) {
@@ -10,10 +11,10 @@ router.post('/organizer/addEvent', function (req, res) {
     const Image = req.body.Image
     const Description = req.body.Description
 
-    const eventDetail = new events({
+    const eventDetail = new eventDetails({
 
         GameTitle: GameTitle,
-        GameType:GameType,
+        GameType: GameType,
         Image: Image,
         Description: Description
     })

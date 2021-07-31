@@ -1,6 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const organizer = require('../models/organizer_detail_model')
+<<<<<<< Updated upstream
+=======
+const email_noti = require('../middleware/email_notifier.js')
+>>>>>>> Stashed changes
 const { check, validationResult } = require('express-validator')
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
@@ -69,10 +73,18 @@ router.post('/organizer/register', [
             console.log("details:", org_details)
             org_details.save().then(function (result) {
                 if (res.json({
+<<<<<<< Updated upstream
                     message: "Registered"
                 })
                 ) {
                     mailer(Email.toString())
+=======
+                    message: "Registered",
+                })
+                ) {
+                    // email_noti.mailer((Email.toString()));
+                    email_noti(Email.toString())
+>>>>>>> Stashed changes
                 } else {
                     (console.error)
                 }
