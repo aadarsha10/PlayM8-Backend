@@ -1,48 +1,19 @@
 const express = require('express')
 const router = express.Router()
 const organizer = require('../models/organizer_detail_model')
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
 const email_noti = require('../middleware/email_notifier.js')
 >>>>>>> Stashed changes
+=======
+const email_noti = require('.email_notifier')
+>>>>>>> 636c297e35dfc60ebc23d7b177d16ed985bf689e
 const { check, validationResult } = require('express-validator')
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const nodemailer = require("nodemailer");
 
-let transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true, // true for 465, false for other ports
-    service: "Gmail",
-    auth: {
-        user: 'm.playm08@gmail.com', // email address user
-        pass: 'm8@Play1234', // email password
-    },
-}); // initiating email sender variable
-
-function mailer(mail_to) {
-    // verify connection configuration
-    transporter.verify(function (error, success) {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log("Server is ready to take our messages");
-        }
-    });
-
-    // send mail with defined transport object
-    let confirmMail = transporter.sendMail({
-        from: '"Play M8👻" <m.playm08@gmail.com>', // sender address
-        to: mail_to, // list of receivers
-        subject: "Hello ✔", // Subject line
-        text: "Hello Organzier", // plain text body
-        html: "<b>Registered Successfully</b><br><b>Welcome to the PlayM8 family</b>", // html body
-    });
-    console.log("Message sent: %s", confirmMail.messageId);
-}
-
-router.post('/organizer/register', [
+router.post('/admin/approve/register', [
     check('Fullname', 'Firstname is required').not().isEmpty(),
     check('Address', 'Address is required').not().isEmpty(),
     check('Contact', 'Contact must be valid').isMobilePhone(),
@@ -77,6 +48,7 @@ router.post('/organizer/register', [
                     message: "Registered"
                 })
                 ) {
+<<<<<<< HEAD
                     mailer(Email.toString())
 =======
                     message: "Registered",
@@ -85,6 +57,9 @@ router.post('/organizer/register', [
                     // email_noti.mailer((Email.toString()));
                     email_noti(Email.toString())
 >>>>>>> Stashed changes
+=======
+                    email_noti(Email.toString())
+>>>>>>> 636c297e35dfc60ebc23d7b177d16ed985bf689e
                 } else {
                     (console.error)
                 }
@@ -97,6 +72,7 @@ router.post('/organizer/register', [
         const error = validationError.errors[0].msg
         console.log("error", error)
         res.json({ message: error })
+
     }
 })
 
