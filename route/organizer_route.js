@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const organizer = require('../models/organizer_detail_model')
-const email_noti = require('.email_notifier')
+const email_noti = require('./email_notifier.js')
 const { check, validationResult } = require('express-validator')
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
@@ -37,10 +37,11 @@ router.post('/admin/approve/register', [
             console.log("details:", org_details)
             org_details.save().then(function (result) {
                 if (res.json({
-                    message: "Registered"
+                    message: "Registered",
+                    
                 })
                 ) {
-                    email_noti(Email.toString())
+                    email_noti.mailer((Email.toString()));
                 } else {
                     (console.error)
                 }

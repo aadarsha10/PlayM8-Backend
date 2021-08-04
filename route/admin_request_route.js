@@ -62,7 +62,7 @@ router.get("/getRequest", function (req, res) {
     .exec()
     .then((data) => {
       console.log("data", data);
-      res.json( data );
+      res.json(data);
     })
     .catch((err) => {
       res.status(500).json({
@@ -74,15 +74,15 @@ router.get("/getRequest", function (req, res) {
 //Read 
 router.post('/getRequest/:username', function (req, res) {
   const uname = req.params.username;
-  var approval_data = admin_request.find({ Username: uname })
-  .then(function (data) {
-    res.status(200).json({ message: "data fetched", approval_data: data })
-  })
+  admin_request.findOne({ Username: uname })
+    .then(function (data) {
+      var approval_data = res.status(200).json({ message: "data fetched", data: data })
+    })
     .catch(function (e) {
       res.status(500).json({ message: e })
     });
   console.log(uname)
-  
+
 });
 
 module.exports = router;
