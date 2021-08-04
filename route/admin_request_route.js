@@ -27,14 +27,14 @@ router.post(
       const Username = req.body.Username;
       const Email = req.body.Email;
       const Password = req.body.Password;
-      bcryptjs.hash(Password, 10, function (err, hash) {
+      
         const admin_request_details = new admin_request({
           Fullname: Fullname,
           Address: Address,
           Contact: Contact,
           Username: Username,
           Email: Email,
-          Password: hash,
+          Password: Password,
         });
         console.log("details:", admin_request_details);
         admin_request_details
@@ -47,7 +47,7 @@ router.post(
           .catch(function (err) {
             res.status(500).json(err);
           });
-      });
+    
     } else {
       const error = validationError.errors[0].msg;
       console.log("error", error);
@@ -69,6 +69,21 @@ router.get("/getRequest", function (req, res) {
         error: err,
       });
     });
+});
+
+//Read 
+router.post('/getRequest/:username', function (req, res) {
+  const uname = req.params.username;
+  var approval_data = admin_request.find({ Username: uname })
+  .then(function (data) {
+      var approve = data
+    res.status(200).json({ message: "data fetched", approval_data: data })
+  })
+    .catch(function (e) {
+      res.status(500).json({ message: e })
+    });
+  console.log(uname)
+  
 });
 
 module.exports = router;

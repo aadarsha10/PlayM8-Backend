@@ -33,4 +33,19 @@ router.post('/organizer/addEvent', function (req, res) {
 
 })
 
+router.get("/getAddedEvent", function (req, res) {
+    events
+      .find()
+      .exec()
+      .then((data) => {
+        console.log("data", data);
+        res.json( data );
+      })
+      .catch((err) => {
+        res.status(500).json({
+          error: err,
+        });
+      });
+  });
+
 module.exports = router

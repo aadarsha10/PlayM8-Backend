@@ -26,12 +26,7 @@ app.use(express.static(path.join(__dirname, '../build')))
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../build'))
 })
-// -----
-// const port = process.env.PORT || 90;
-// app.listen(port, () => {
-//     console.log(`Server started on port ${port}`);
-// });
-
+// ---server port config
 let port = process.env.PORT;
 if (port == null || port == "") {
     port = 5000;
