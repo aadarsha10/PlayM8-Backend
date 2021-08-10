@@ -27,7 +27,7 @@ function mailer(mail_to) {
         to: mail_to, // list of receivers
         subject: "Registration Successful! ✔", // Subject line
         text: "Hello Organizer", // plain text body
-        html: "<b>Registered Successfully</b><br><b>Welcome to the PlayM8 family</b>", // html body
+        html: "<b>Registered Successfully</b><br><b>Welcome to the PlayM8 family</b> Now you can procced to login", // html body
     });
     console.log("Message sent: %s", confirmMail.messageId);
 }
