@@ -14,6 +14,18 @@ const events = mongoose.model('Events', {
         type: String,
         required: false
     },
+    GameDate: {
+        type: String,
+        required: true
+    },
+    Prize: {
+        type: String,
+        required: false
+    },
+    Venue: {
+        type: String,
+        required: true
+    },
 
     Description: {
         type: String,
