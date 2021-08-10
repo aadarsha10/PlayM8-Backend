@@ -1,14 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const organizer = require('../models/organizer_detail_model')
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
 const email_noti = require('../middleware/email_notifier.js')
->>>>>>> Stashed changes
-=======
-const email_noti = require('.email_notifier')
->>>>>>> 636c297e35dfc60ebc23d7b177d16ed985bf689e
 const { check, validationResult } = require('express-validator')
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
@@ -44,22 +37,10 @@ router.post('/admin/approve/register', [
             console.log("details:", org_details)
             org_details.save().then(function (result) {
                 if (res.json({
-<<<<<<< Updated upstream
                     message: "Registered"
                 })
                 ) {
-<<<<<<< HEAD
-                    mailer(Email.toString())
-=======
-                    message: "Registered",
-                })
-                ) {
-                    // email_noti.mailer((Email.toString()));
                     email_noti(Email.toString())
->>>>>>> Stashed changes
-=======
-                    email_noti(Email.toString())
->>>>>>> 636c297e35dfc60ebc23d7b177d16ed985bf689e
                 } else {
                     (console.error)
                 }
