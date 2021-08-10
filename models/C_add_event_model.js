@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const events = mongoose.model('Events', {
+const C_events = mongoose.model('Client Events', {
 
     GameTitle: {
         type: String,
@@ -14,18 +14,6 @@ const events = mongoose.model('Events', {
         type: String,
         required: false
     },
-    GameDate: {
-        type: String,
-        required: true
-    },
-    Prize: {
-        type: String,
-        required: false
-    },
-    Venue: {
-        type: String,
-        required: true
-    },
 
     Description: {
         type: String,
@@ -33,4 +21,4 @@ const events = mongoose.model('Events', {
     }
 })
 
-module.exports = events
+module.exports = C_events
