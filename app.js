@@ -8,7 +8,7 @@ const route_player = require("./route/playerSignup_route");
 const request_route = require("./route/admin_request_route");
 const add_event = require('./route/add_event')
 require("./database/db");
-const imageUpload = require('./route/imageupload')
+// const imageUpload = require('./route/imageupload')
 const route_menSingles = require('./route/MenSingles_route')
 
 // -----
@@ -23,14 +23,14 @@ app.use(route_admin);
 app.use(route_player);
 app.use(request_route);
 app.use(add_event)
-app.use(imageUpload)
+// app.use(imageUpload)
 app.use(route_menSingles)
 
-// // -----
-app.use(express.static(path.join(__dirname, "../build")));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../build"));
-});
+// -----
+// app.use(express.static(path.join(__dirname, "../build")));
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../build"));
+// });
 // ---server port config
 let port = process.env.PORT;
 if (port == null || port == "") {

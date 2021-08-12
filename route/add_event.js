@@ -1,14 +1,15 @@
 const express = require('express')
 const router = express.Router()
 const events = require('../models/add_event_model')
+const upload = require('../middleware/upload')
 
 
 
-router.post('/organizer/addEvent', function (req, res) {
+router.post('/organizer/addEvent', upload.single('image'), function (req, res) {
 
     const GameTitle = req.body.GameTitle
     const GameType = req.body.GameType
-    const Image = req.body.Image
+    const Image = req.file.filename
     const GameDate = req.body.Date
     const Prize = req.body.Prize
     const Venue = req.body.Venue
