@@ -30,6 +30,12 @@ const events = mongoose.model('Events', {
     Description: {
         type: String,
         required: true
+    },
+
+    Username : {
+        type : String,
+        required : true,
+        
     }
 })
 

@@ -13,6 +13,7 @@ router.post('/organizer/addEvent', function (req, res) {
     const Prize = req.body.Prize
     const Venue = req.body.Venue
     const Description = req.body.Description
+    const Username = req.body.Username
 
     const eventDetail = new events({
 
@@ -22,7 +23,8 @@ router.post('/organizer/addEvent', function (req, res) {
         GameDate : GameDate,
         Prize : Prize,
         Venue : Venue,
-        Description: Description
+        Description: Description,
+        Username : Username
     })
 
     console.log("event", eventDetail)
@@ -39,7 +41,10 @@ router.post('/organizer/addEvent', function (req, res) {
 
 })
 
-router.get("/getAddedEvent", function (req, res) {
+router.get("/getAddedEvent/Client", function (req, res) {
+
+
+
     events
       .find()
       .exec()
@@ -53,5 +58,28 @@ router.get("/getAddedEvent", function (req, res) {
         });
       });
   });
+
+  router.post('/getAddedEvent', (req,res) => {
+
+    const GameType = req.body.GameType;
+    const Username = req.body.Username
+    console.log('getcart.customer_id',Username)
+    events.find({Username : Username, GameType: GameType})
+        .then(function(data){
+            res.json(
+                  data
+            );
+        })
+        .catch((err) => {
+            res.status(500).json({
+                error: err,
+            })
+        })
+        
+        // => res.json(details))
+
+
+
+});
 
 module.exports = router

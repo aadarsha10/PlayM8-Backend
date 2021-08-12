@@ -10,7 +10,7 @@ const men = mongoose.model('MenSingles', {
     PlayerSN : {
         type : String,
         required : true,
-        unique :  true
+        unique : true
 
     },
     PlayerRepresentation : {
