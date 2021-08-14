@@ -11,7 +11,7 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = function (req, file, cb) {
-  if (file.mimetype == "image/jpeg") {
+  if (file.mimetype == "image/jpeg" || file.mimetype == 'image/jpg') {
     cb(null, true);
   } else {
     cb(null, false);
@@ -20,7 +20,7 @@ const fileFilter = function (req, file, cb) {
 
 const upload = multer({
   storage: storage,
-  fileFilter: fileFilter,
+  fileFilter: fileFilter
 })
 
 
