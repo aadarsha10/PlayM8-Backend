@@ -10,6 +10,7 @@ const add_event = require('./route/add_event')
 require("./database/db");
 const imageUpload = require('./route/imageupload')
 const route_menSingles = require('./route/MenSingles_route')
+const route_menSingles_rank = require('./route/TT_Ranking_MenSingles_route')
 
 // -----
 app.use(express.urlencoded({ extended: true }));
@@ -23,8 +24,9 @@ app.use(route_admin);
 app.use(route_player);
 app.use(request_route);
 app.use(add_event)
-app.use(imageUpload)
+// app.use(imageUpload)
 app.use(route_menSingles)
+app.use(route_menSingles_rank)
 
 // // -----
 app.use(express.static(path.join(__dirname, "../build")));
