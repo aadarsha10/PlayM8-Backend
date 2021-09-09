@@ -8,7 +8,7 @@ router.post('/organizer/addEvent', function (req, res) {
 
     const GameTitle = req.body.GameTitle
     const GameType = req.body.GameType
-    const Image = req.body.Image
+    const image = req.file.filename
     const GameDate = req.body.Date
     const Prize = req.body.Prize
     const Venue = req.body.Venue
@@ -19,7 +19,7 @@ router.post('/organizer/addEvent', function (req, res) {
 
         GameTitle: GameTitle,
         GameType:GameType,
-        Image: Image,
+        Image: image,
         GameDate : GameDate,
         Prize : Prize,
         Venue : Venue,
