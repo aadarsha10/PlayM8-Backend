@@ -87,10 +87,6 @@ router.get('/getAddedEvent', (req, res) => {
             })
         })
 
-    // => res.json(details))
-
-
-
 });
 
 module.exports = router

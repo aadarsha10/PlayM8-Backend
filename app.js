@@ -7,6 +7,7 @@ const route_admin = require("./route/admin_route");
 const route_player = require("./route/playerSignup_route");
 const request_route = require("./route/admin_request_route");
 const add_event = require('./route/add_event')
+const addPlayerRanking = require('./route/addPlayerRank_route')
 require("./database/db");
 // const imageUpload = require('./route/imageupload')
 const route_menSingles = require('./route/MenSingles_route')
@@ -24,6 +25,7 @@ app.use(route_player);
 app.use(request_route);
 app.use(add_event)
 // app.use(imageUpload)
+app.use(addPlayerRanking)
 app.use(route_menSingles)
 
 // -----

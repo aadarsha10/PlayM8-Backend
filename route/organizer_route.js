@@ -91,7 +91,7 @@ router.post("/organizer/login", function (req, res) {
                     if (result === false) {
                         return res
                             .status(403)
-                            .json({ message: "Invalid Username or Passworddddd" });
+                            .json({ message: "Invalid Username or Password" });
                     } else {
                         const token = jwt.sign(
                             { organizerID: organizerData._id },

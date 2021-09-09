@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
-const user = require('../models/admin_details_model')
+const org = require('../models/organizer_detail_model')
+const admin = require('../models/admin_details_model')
 
 module.exports.checkUser = function (req, res, next) {
     try {
