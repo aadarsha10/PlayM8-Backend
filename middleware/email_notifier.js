@@ -11,7 +11,7 @@ let transporter = nodemailer.createTransport({
     },
 }); // initiating email sender variable
 
-function mailer(mail_to)  {
+function mailer(mail_to) {
     // verify connection configuration
     transporter.verify(function (error, success) {
         if (error) {
@@ -32,4 +32,4 @@ function mailer(mail_to)  {
     console.log("Message sent: %s", confirmMail.messageId);
 }
 
-module.exports = mailer
+module.exports = mailer;

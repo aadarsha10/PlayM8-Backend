@@ -1,10 +1,20 @@
 const express = require('express')
 const router = express.Router()
 const events = require('../models/add_event_model')
+const upload = require('../middleware/upload')
 
 
 
-router.post('/organizer/addEvent', function (req, res) {
+router.post('/organizer/addEvent', upload.single('image'), function (req, res) {
+
+    console.log(req.body);
+
+    if (req.file == undefined) {
+        console.log("file aayo????", req.file)
+        return res.status(400).json({
+            message: "Invalid file format"
+        })
+    }
 
     const GameTitle = req.body.GameTitle
     const GameType = req.body.GameType
@@ -18,18 +28,19 @@ router.post('/organizer/addEvent', function (req, res) {
     const eventDetail = new events({
 
         GameTitle: GameTitle,
-        GameType:GameType,
+        GameType: GameType,
         Image: image,
-        GameDate : GameDate,
-        Prize : Prize,
-        Venue : Venue,
+        GameDate: GameDate,
+        Prize: Prize,
+        Venue: Venue,
         Description: Description,
-        Username : Username
+        Username: Username
     })
 
     console.log("event", eventDetail)
 
     eventDetail.save().then(function () {
+        // res.send(image)
         res.status(201).json({
             success: true,
             message: "success"
@@ -46,28 +57,28 @@ router.get("/getAddedEvent/Client", function (req, res) {
 
 
     events
-      .find()
-      .exec()
-      .then((data) => {
-        console.log("data", data);
-        res.json( data );
-      })
-      .catch((err) => {
-        res.status(500).json({
-          error: err,
+        .find()
+        .exec()
+        .then((data) => {
+            console.log("data", data);
+            res.json(data);
+        })
+        .catch((err) => {
+            res.status(500).json({
+                error: err,
+            });
         });
-      });
-  });
+});
 
-  router.post('/getAddedEvent', (req,res) => {
+router.get('/getAddedEvent', (req, res) => {
 
     const GameType = req.body.GameType;
     const Username = req.body.Username
-    console.log('getcart.customer_id',Username)
-    events.find({Username : Username, GameType: GameType})
-        .then(function(data){
+    console.log('getcart.customer_id', Username)
+    events.find({ Username: Username, GameType: GameType })
+        .then(function (data) {
             res.json(
-                  data
+                data
             );
         })
         .catch((err) => {
@@ -75,10 +86,6 @@ router.get("/getAddedEvent/Client", function (req, res) {
                 error: err,
             })
         })
-        
-        // => res.json(details))
-
-
 
 });
 
